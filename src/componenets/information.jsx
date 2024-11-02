@@ -19,9 +19,14 @@ export default function InformationContainer({ winner, field, setField, currentP
 		setCurrentPlayer(true)
 	}
 
-	if (!field.includes('') && !winner) {
-		setIsDraw(true)
-	}
+	// условие для появления сообщения что в игре ничья
+	// если раскомментировать это условие то выдаст такую ошибку
+	// я так понимаю не обновляется состояние isDraw в корневой папке из дочк=ерней, как исправить не знаю
+	// Не удается обновить компонент ("App") при отображении другого компонента ("InformationContainer"). Чтобы найти неисправный вызов setState() внутри "Information Container", выполните трассировку стека
+
+	// if (!field.includes('') && !winner) {
+	// 	setIsDraw(true)
+	// }
 
 	return (
 		<>
@@ -56,9 +61,9 @@ function InformationLayout({ currentPlayer, winner, buttonClick, isDraw }) {
 			<p className={classes.info}>
 				{winner ? `Победитель - ${winner}` : `Следующий ход - ${currentPlayer ? 'x' : 'o'}`}
 			</p>
-			<p className={classes.draw}>
+			{/* <p className={classes.draw}>
 				{isDraw ? Ничья : ''}
-			</p>
+			</p> */}
 		</div>
 	)
 }
