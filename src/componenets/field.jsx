@@ -1,16 +1,6 @@
 import classes from '../app.module.css'
-import PropTypes from 'prop-types'
 
 export default function FieldContainer({ winner, field, setField, currentPlayer, setCurrentPlayer, isGameEnded }) {
-
-	FieldContainer.PropTypes = {
-		winner: PropTypes.string,
-		field: PropTypes.array,
-		currentPlayer: PropTypes.bool,
-		isGameEnded: PropTypes.bool,
-		setField: PropTypes.func,
-		setCurrentPlayer: PropTypes.func,
-	}
 
 	function handleClick(index) {
 		let fieldCopy = [...field]
@@ -39,12 +29,6 @@ export default function FieldContainer({ winner, field, setField, currentPlayer,
 
 
 function FieldLayout({ field, isGameEnded, handleClick }) {
-
-	FieldContainer.PropTypes = {
-		field: PropTypes.array,
-		isGameEnded: PropTypes.bool,
-		handleClick: PropTypes.func,
-	}
 
 	return (
 		<div className={classes.gameField} >

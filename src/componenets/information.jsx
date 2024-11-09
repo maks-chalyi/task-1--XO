@@ -1,32 +1,24 @@
 import classes from '../App.module.css'
 import { FIELD } from '../data'
-import PropTypes from 'prop-types'
+import { useEffect } from 'react'
 
 export default function InformationContainer({ winner, field, setField, currentPlayer, setCurrentPlayer, isDraw, setIsDraw }) {
 
-	FieldContainer.PropTypes = {
-		winner: PropTypes.string,
-		field: PropTypes.array,
-		setField: PropTypes.func,
-		currentPlayer: PropTypes.bool,
-		setCurrentPlayer: PropTypes.func,
-		isDraw: PropTypes.bool,
-		setIsDraw: PropTypes.func,
-	}
+	useEffect(() => {
+		if (!field.includes('') && !winner) {
+			setIsDraw(true)
+		}
+		
+		if (field.includes('')) {
+			setIsDraw(false)
+		}
+	})
 
 	function buttonClick() {
-		setField(FIELD)
+		setField(FIELD) // чтобы очистилось поле после нажатия кнопки
 		setCurrentPlayer(true)
+
 	}
-
-	// условие для появления сообщения что в игре ничья
-	// если раскомментировать это условие то выдаст такую ошибку
-	// я так понимаю не обновляется состояние isDraw в корневой папке из дочк=ерней, как исправить не знаю
-	// Не удается обновить компонент ("App") при отображении другого компонента ("InformationContainer"). Чтобы найти неисправный вызов setState() внутри "Information Container", выполните трассировку стека
-
-	// if (!field.includes('') && !winner) {
-	// 	setIsDraw(true)
-	// }
 
 	return (
 		<>
@@ -43,14 +35,6 @@ export default function InformationContainer({ winner, field, setField, currentP
 
 function InformationLayout({ currentPlayer, winner, buttonClick, isDraw }) {
 
-	FieldContainer.PropTypes = {
-		winner: PropTypes.string,
-		currentPlayer: PropTypes.bool,
-		buttonClick: PropTypes.func,
-		isDraw: PropTypes.bool,
-	}
-
-	
 	return (
 		<div className={classes.infoContent}>
 			<button
@@ -61,9 +45,9 @@ function InformationLayout({ currentPlayer, winner, buttonClick, isDraw }) {
 			<p className={classes.info}>
 				{winner ? `Победитель - ${winner}` : `Следующий ход - ${currentPlayer ? 'x' : 'o'}`}
 			</p>
-			{/* <p className={classes.draw}>
-				{isDraw ? Ничья : ''}
-			</p> */}
+			<p className={classes.draw}>
+				{isDraw ? 'Ничья' : ''}
+			</p>
 		</div>
 	)
 }
